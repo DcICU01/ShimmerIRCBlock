@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "xyz.dcicu.shimmerfix.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"IRCConnectionBlocker",
+		"HaikuLoggerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

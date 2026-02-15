@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "shimmerfix",
+	"version": "1.0.0",
+	"name": "Shimmer IRC Block",
+	"description": "Blocks IRC connection for Shimmer mod",
+	"authors": [
+		"DcICU"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/shimmerfix/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"xyz.dcicu.shimmerfix.ShimmerFix"
+		]
+	},
+	"mixins": [
+		"shimmerfix.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": ">=1.21.10",
+		"java": ">=21",
+		"fabric-api": "*",
+		"shimmer": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
