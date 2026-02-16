@@ -1,6 +1,7 @@
 plugins {
 	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
+	id 'fabric-loom' version "${loom_version}"
 }
 
 version = project.mod_version
@@ -19,12 +20,12 @@ repositories {
 }
 
 loom {
-	splitEnvironmentSourceSets()
+//	splitEnvironmentSourceSets()
 
 	mods {
 		"modid" {
 			sourceSet sourceSets.main
-			sourceSet sourceSets.client
+//			sourceSet sourceSets.client
 		}
 	}
 

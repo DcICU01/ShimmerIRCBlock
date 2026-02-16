@@ -4,7 +4,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"IRCConnectionBlocker",
-		"HaikuLoggerMixin"
+		"HaikuLoggerMixin",
+		"MacroProtectorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
