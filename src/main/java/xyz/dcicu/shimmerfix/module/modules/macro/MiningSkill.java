@@ -74,8 +74,8 @@ public class MiningSkill extends Module {
     public void onTick(TickEvent event) {
         if (isEnabled()) {
             long now = System.currentTimeMillis();
-            // 每 2 秒发送一次消息
-            if (now - lastMessageTime >= 2000) {
+            // 每 10 秒发送一次消息
+            if (now - lastMessageTime >= 10000) {
                 Component message = null;
                 if (onSkill) {
                     message = Component.literal("You are using your Mining Skill!");
@@ -90,7 +90,6 @@ public class MiningSkill extends Module {
                 }
             }
         }
-        //要的就是刷屏的效果
     }
 
     private void onGameMessage(Component message, boolean overlay) {

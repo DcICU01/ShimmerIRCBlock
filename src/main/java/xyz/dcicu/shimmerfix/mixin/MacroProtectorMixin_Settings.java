@@ -30,6 +30,13 @@ public abstract class MacroProtectorMixin_Settings {
     );
 
     @Unique
+    private final BooleanSetting ifDisable = new BooleanSetting(
+            "Auto disable",
+            "Whether to disable this macro when someone comes",
+            true
+    );
+
+    @Unique
     private final BooleanSetting enableRangeProtect = new BooleanSetting(
             "Range Protect",
             "Allow range-protect when macroing",
@@ -52,7 +59,7 @@ public abstract class MacroProtectorMixin_Settings {
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         MacroProtector self = (MacroProtector) (Object) this;
-        self.addSettings(enableRangeProtect, protectRange, autoRestore);
+        self.addSettings(enableRangeProtect, protectRange, ifDisable, autoRestore);
     }
 
     @ShimmerSubscribe
@@ -86,7 +93,7 @@ public abstract class MacroProtectorMixin_Settings {
         }
 
         if (playerNearby) {
-            if (!protectionTriggered) {
+            if (!protectionTriggered && ifDisable.isEnabled()) {
                 // 玩家进入范围且未触发保护 → 触发禁用
                 self.disableAllMacro();
 
@@ -108,9 +115,31 @@ public abstract class MacroProtectorMixin_Settings {
                 }
                 protectionTriggered = true;
             }
+            else if (!protectionTriggered && !ifDisable.isEnabled()) {
+                // 玩家进入范围且未触发保护 仅通知模式
+
+
+                if (self.systemTray.isEnabled()) {
+                    WindowsNotificationUtils.sendNotification(
+                            "MacroProtector",
+                            "请注意， 检测到有玩家靠近",
+                            2
+                    );
+                }
+                if (self.sound.isEnabled()) {
+                    mc.level.playSound(
+                            mc.player,
+                            mc.player.blockPosition(),
+                            SoundEvents.EXPERIENCE_ORB_PICKUP,
+                            SoundSource.PLAYERS,
+                            3.0F, 1.0F
+                    );
+                }
+                protectionTriggered = true;
+            }
         } else {
             // 玩家离开范围
-            if (protectionTriggered && autoRestore.isEnabled()) {
+            if (protectionTriggered && autoRestore.isEnabled() && ifDisable.isEnabled()) {
                 // 自动恢复被禁用的宏
                 MacroProtectorAccessor accessor = (MacroProtectorAccessor) self;
                 accessor.restoreDisabledMacros();
