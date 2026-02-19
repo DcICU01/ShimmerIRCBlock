@@ -3,8 +3,6 @@ package xyz.dcicu.shimmerfix.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import dev.greencat.shimmer.module.modules.macro.AutoFish;
 import dev.greencat.shimmer.setting.settings.NumberSetting;
-import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
-import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
